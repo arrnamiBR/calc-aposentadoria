@@ -31,15 +31,28 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnmostrar.setOnClickListener {
             val idade:Int? = binding.inputidade.text.toString().toIntOrNull()
+            val resultado:Int
 
             if (idade != null) {
-                if (sexo == 'm') {
-                    binding.textidade.text = "Faltam ${65 - idade} anos para você se aposentar."
-                } else if (sexo == 'f') {
-                    binding.textidade.text = "Faltam ${62 - idade} anos para você se aposentar."
+
+                if (sexo != 'a') {
+
+                    if (sexo == 'm') {
+                        resultado = 65 - idade
+                    } else {
+                        resultado = 62 - idade
+                    }
+
+                    if (resultado > 0) {
+                        binding.textidade.text = "Faltam ${resultado} anos para você se aposentar."
+                    } else {
+                        binding.textidade.text = "Você já pode se aposentar."
+                    }
+
                 } else {
                     binding.textidade.text = "Selecione um sexo."
                 }
+
             } else {
                 binding.textidade.text = "Insira uma idade."
             }
